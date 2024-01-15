@@ -1,0 +1,534 @@
+@import url('https://fonts.googleapis.com/css2?family=PT Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&display=swap');
+*{
+  font-family: PT serif;
+}
+.grid-container{
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 3fr;
+  grid-template-areas: 'sidebar header header header' 'sidebar main main main';
+  height: 100vh;
+}
+/*Header*/
+.header{
+  grid-area: header;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px 0 30px;
+  box-shadow: 0 6px 7px -3px rgba(0,0,0,0.35);
+  
+}
+.menu-icon{
+  display: none;
+}
+
+
+/*transactionlist*/
+.transcation-container{
+  color: black;
+  display: block;
+}
+
+/* DashboardPage.css */
+.dashboard-container {
+  padding: 20px;
+}
+
+.summary-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.summary-item {
+  text-align: center;
+}
+
+.amount {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff; /* Adjust the color as needed */
+}
+
+.chart-container {
+  margin-top: 20px;
+  max-width: 600px; /* Adjust the maximum width as needed */
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Navbar */
+.nav-container {
+  display: flex;
+  transition: all 0.3s ease;
+}
+
+.navbar {
+  background-image: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
+  color: black;
+  height: 100vh;
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.top_section {
+  display: flex;
+  align-items: center;
+  padding: 20px 15px;
+}
+
+.logo {
+  font-size: 25px;
+}
+
+.link {
+  display: flex;
+  color: black;
+  padding: 10px 15px;
+  gap: 15px;
+  transition: all 0.5s;
+}
+
+.link:hover {
+ 
+  color: #000007;
+  transition: all 0.5s;
+}
+
+.active {
+  
+  color: #a14545;
+}
+
+.icon,
+.link_text {
+  font-size: 20px;
+}
+
+.bar {
+  display: flex;
+  font-size: 25px;
+  margin-left: 30px;
+}
+
+/* Sidebar for larger screens */
+.sidebar {
+  width: 260px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
+  transition: width 0.3s ease;
+  overflow-y: auto;
+}
+
+/* Default styles for larger screens */
+.app-container {
+  display: flex;
+}
+
+.content-container {
+  flex-grow: 1;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .app-container {
+    flex-direction:row; /* Stack content container on top of the navbar */
+  }
+
+  .nav-container {
+    width: 20%;
+  }
+
+  .navbar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .content-container {
+    
+   
+    width: 100%; /* Full width for smaller screens */
+    box-sizing: border-box;
+  }
+}
+
+
+
+
+/* Add more syling as needed */
+
+
+/* Add more styling as needed */
+
+
+.transaction-header{
+
+  background-color: #9e9ea4;
+  width: 100%;
+}
+/*add transaction button*/
+/* Basic Button Styling */
+.button {
+ 
+  align-items: center;
+  justify-content: center;
+  width: 50px; /* Set a fixed width and height for a perfect circle */
+  height: 50px;
+  border-radius: 50%; /* Make it a circle */
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid #3498db;
+  color: #ffffff;
+  background-color: #3498db;
+}
+
+/* Button Hover Effect */
+.button:hover {
+  background-color: #2980b9;
+  border-color: #2980b9;
+}
+
+/* Button Active State */
+.button:active {
+  background-color: #1f618d;
+  border-color: #1f618d;
+}
+/* Basic Input Field Styling */
+.input-field {
+  padding: 10px 30px; /* Adjust padding based on the icon's width */
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Input Field Focus State */
+.input-field:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.7);
+}
+/* Basic Select Styling */
+.select-field {
+  
+  width: 100px;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  appearance: none; /* Remove default arrow icon in some browsers */
+  background: url('data:image/svg+xml;utf8,<svg fill="black" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center/15px 15px; /* Add custom arrow icon */
+}
+
+/* Select Focus State */
+.select-field:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.7);
+}
+
+/* Style Options */
+.select-field option {
+  padding: 10px;
+}
+.search-container {
+  position: relative;
+  display: inline-block;
+}
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #888;
+}
+.button {
+  margin-right: 50px;
+}
+.label{
+  margin-right: 20px;
+}
+@media (max-width: 600px) {
+
+  .button {
+    margin-right: 0px;
+    margin-top: 28px;
+    
+  }
+  .label{
+    margin-right: 0px;
+    font-size: 12px;
+   
+  }
+  .select-field{
+    margin: 0px;
+    width: 80px;
+    
+    
+  }
+  .input-field{
+    width: 100px;
+  }
+}
+
+/* TransactionForm Styles */
+
+/* Container Styles */
+.form-container {
+  width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  margin-top: 12px;
+}
+
+/* Form Header Styles */
+.form-container h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Form Element Styles */
+form div {
+  margin-bottom: 15px;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.form-container input,
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+/* Radio Button Styles */
+.form-container label > input[type="radio"] {
+  display: none;
+}
+
+.form-container label > input[type="radio"] + svg {
+  margin-right: 5px;
+}
+
+/* Buttons Styles */
+.form-button {
+  padding: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+}
+
+.form-button:hover {
+  background-color: #2980b9;
+}
+
+/* Reset Button Styles */
+[type="reset"] {
+  background-color: #e74c3c;
+}
+
+[type="reset"]:hover {
+  background-color: #c0392b;
+}
+/* TransactionForm Popup Styles */
+
+/* Center the Popup */
+
+
+/* Container Styles */
+
+
+/* Buttons Styles */
+.popup button {
+  padding: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+}
+
+.popup button:hover {
+  background-color: #2980b9;
+}
+
+/* Reset Button Styles */
+.popup [type="reset"] {
+  background-color: #e74c3c;
+}
+
+.popup [type="reset"]:hover {
+  background-color: #c0392b;
+}
+/* Table Styles */
+/* Responsive Table Styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+
+thead {
+  background-color: #3498db;
+  color: #fff;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Style the Edit and Delete buttons */
+.action-buttons  {
+  padding: 6px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  color:black;
+  border: none;
+  border-radius: 3px;
+}
+
+#edit-button {
+  color: #040404;
+}
+
+#delete-button {
+  color: red;
+}
+
+/* Additional styles for small screens */
+@media (max-width: 600px) {
+  th, td {
+    padding: 8px;
+  }
+
+  .action-buttons button {
+    padding: 4px 8px;
+  }
+}
+
+
+/* Add this CSS in your stylesheets or component style */
+
+/* Card Styles */
+.budget-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.budget-card div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.budget-card p {
+  margin: 8px 0;
+}
+
+/* Donut Chart Styles */
+canvas {
+  margin-top: 20px; /* Adjust margin as needed */
+  max-width: 300px; /* Set a maximum width for the chart */
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.calendar-page {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  color: #3498db;
+  margin-bottom: 20px;
+}
+
+.loading {
+  color: #555;
+  font-size: 18px;
+  text-align: center;
+}
+
+.event {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.income-event {
+  background-color: #27ae60;
+  color: #fff;
+}
+
+.expense-event {
+  background-color: #e74c3c;
+  color: #fff;
+}
+.custom-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.today-button,
+.navigation-buttons button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toolbar-label {
+  font-size: 18px;
+}
