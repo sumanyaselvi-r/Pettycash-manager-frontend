@@ -20,7 +20,7 @@ const DashboardPage = () => {
     if (isAuthenticated) {
       // Fetch summary data from the backend with authentication
       axios
-        .get('/api/transaction-summary', {
+        .get('https://pettycashbackend.onrender.com/api/transaction-summary', {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -30,7 +30,7 @@ const DashboardPage = () => {
 
       // Fetch top expenses data from the backend with authentication
       axios
-        .get('/api/top-expenses', {
+        .get('https://pettycashbackend.onrender.com/api/top-expenses', {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
