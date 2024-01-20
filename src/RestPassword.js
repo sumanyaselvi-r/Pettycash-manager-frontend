@@ -15,7 +15,7 @@ const ResetPassword = () => {
         return;
       }
 
-      const response = await axios.post(`/reset-password/:${token}`, {
+      const response = await axios.post(`https://pettycashbackend.onrender.com/reset-password/:${token}`, {
         password,
         confirmPassword,
       });
