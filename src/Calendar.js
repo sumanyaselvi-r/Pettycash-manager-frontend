@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
-import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
 import axios from 'axios';
-
-import { useAuth } from './AuthContext'; 
+import { useAuth } from './AuthContext';
+import { Calendar as ReactCalendar } from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const MyCalendarPage = () => {
-  const { isAuthenticated, user } = useAuth(); 
-
-  const localizer = momentLocalizer(moment);
+  const { isAuthenticated, user } = useAuth();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
     if (isAuthenticated) {
       axios
-        .get('https://pettycashbackend.onrender.com/api/calendar-events', {
+        .get('/api/calendar-events', {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -32,43 +30,60 @@ const MyCalendarPage = () => {
     }
   }, [isAuthenticated, user.token]);
 
-  const EventComponent = ({ event }) => (
-    <>
-      {event.income > 0 && <div style={{ color: 'green', backgroundColor: 'white', justifyContent: 'center' }}>Income: {event.income}</div>}
-      {event.expense > 0 && <div style={{ color: 'red', backgroundColor: 'white', justifyContent: 'center' }}>Expense: {event.expense}</div>}
-    </>
-  );
+  const getEventsForSelectedDate = () => {
+    return events.find((event) => {
+      const eventDate = new Date(event.start);
+      return eventDate.toDateString() === selectedDate.toDateString();
+    });
+  };
 
   return (
-    <div className="calendar-page">
-      <h2>Calendar</h2>
-   
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <Calendar
-          localizer={localizer}
-          events={events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: 500 }}
-          components={{
-            event: EventComponent,
-          }}
-          views={{
-            month: true,
-            week: false,
-            day: false,
-            agenda: false,
-          }}
-          toolbar={{
-            today: false,
-            prev: true,
-            next: true,
-          }}
-        />
-      )}
-    </div>
+    <Container fluid className="calendar-page" style={{justifyContent:'center'}}>
+      <Row>
+        <Col lg={8} className="mb-4">
+          <h2> Calendar</h2>
+          <ReactCalendar onChange={(date) => setSelectedDate(date)} value={selectedDate} />
+          <div>
+            {/* Display income and expense amounts for each date below the calendar */}
+            {events.map((event) => (
+              <div key={event.id}>
+                {event.income > 0 && (
+                  <div style={{ color: 'green' }}>
+                    {new Date(event.start).toDateString()}: Income: {event.income}
+                  </div>
+                )}
+                {event.expense > 0 && (
+                  <div style={{ color: 'red' }}>
+                    {new Date(event.start).toDateString()}: Expense: {event.expense}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </Col>
+        <Col lg={4}>
+          
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+           
+            <div>
+             
+              {getEventsForSelectedDate() && (
+                <div>
+                  {getEventsForSelectedDate().income > 0 && (
+                    <div style={{ color: 'green' }}>Income: {getEventsForSelectedDate().income}</div>
+                  )}
+                  {getEventsForSelectedDate().expense > 0 && (
+                    <div style={{ color: 'red' }}>Expense: {getEventsForSelectedDate().expense}</div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
