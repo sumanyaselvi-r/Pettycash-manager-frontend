@@ -57,7 +57,7 @@ const Registration = () => {
   };
   const handleRegister = async () => {
     try {
-      await axios.post('/api/register', formData);
+      await axios.post('https://pettycashbackend.onrender.com/api/register', formData);
       console.log('Registration successful!');
       setModalIsOpen(true);
       seterrorMessage('')
