@@ -11,7 +11,7 @@ const MonthlySpendingChart = () => {
     if (isAuthenticated) {
       // Fetch monthly spending data from the backend with authentication
       axios
-        .get('/api/analytics/monthly-trends', {
+        .get('https://pettycashbackend.onrender.com/api/analytics/monthly-trends', {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -33,7 +33,7 @@ const MonthlySpendingChart = () => {
       {
         label: 'Monthly Spending Trends',
         data: monthlySpendingData.data,
-        backgroundColor: 'rgba(75, 192, 192, 0.7)', // Customize the scatter plot color
+        backgroundColor: 'rgba(75, 192, 192, 0.7)', 
       },
     ],
   };
