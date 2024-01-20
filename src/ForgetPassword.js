@@ -35,7 +35,7 @@ const ForgotPassword = () => {
   };
   const handleForgotPassword = async () => {
      try {
-      const response = await axios.post('/api/forgot-password', { email });
+      const response = await axios.post('https://pettycashbackend.onrender.com/api/forgot-password', { email });
       setMessage(response.data.message);
       setError('');
       setSuccess(true);
