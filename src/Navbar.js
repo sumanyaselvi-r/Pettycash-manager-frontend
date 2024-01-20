@@ -51,7 +51,7 @@ function Navbar() {
         <div className='nav-container'>
             <div style={{width:isOpen? "300px" : "50px"}} className='navbar'>
                 <div className='top_section'>
-                    <h1 style={{display:isOpen? "block" : "none"}} className='logo'><span><GiCash style={{fontSize:'50px'}}/> PettyPal</span> 
+                    <h1 style={{display:isOpen? "block" : "none"}} className='logo'><span><GiCash style={{fontSize:'50px'}}/>TransactionTrove</span> 
              </h1>
                     <div style={{marginLeft:isOpen? "50px" : "0px"}} className='bar'>
                     <FaBars onClick={toggle} />
