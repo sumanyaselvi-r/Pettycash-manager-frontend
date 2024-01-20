@@ -42,6 +42,7 @@
 .nav-container {
   display: flex;
   transition: all 0.3s ease;
+  height: 100%;
   background-image: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
 }
 
@@ -125,13 +126,13 @@
   }
 
   .nav-container {
-    width: 20%;
+    width: 90%;
   }
 
   .navbar {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 30%;
   }
 
   .content-container {
