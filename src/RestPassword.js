@@ -15,7 +15,7 @@ const ResetPassword = () => {
         return;
       }
 
-      const response = await axios.post(`https://pettycashbackend.onrender.com/reset-password/:${token}`, {
+      const response = await axios.post(`/reset-password/:${token}`, {
         password,
         confirmPassword,
       });
@@ -51,7 +51,7 @@ const ResetPassword = () => {
       </label>
       <br />
       <button onClick={handleResetPassword}>Reset Password</button>
-      <p>{message}</p>
+      <p style={{color:'red'}}>{message}</p>
     </div>
     </div>
     </div>
