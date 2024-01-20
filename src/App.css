@@ -307,7 +307,7 @@ tbody tr:hover {
   justify-content: center;
   align-items: center;
   height: 100vh; 
-  width: 100%;
+  width: 200%;
 }
 
 h2 {
@@ -315,8 +315,7 @@ h2 {
 }
 
 .react-calendar {
-  max-width: 100%;
-  width: 300px;
+  width: 100%;
   margin: 20px 0;
  
 }
@@ -354,8 +353,7 @@ h2 {
 
 
 .dashboard-container {
-  max-width: 1200px;
-  margin: 0 auto;
+ 
   padding: 20px;
 
 }
@@ -368,7 +366,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  
+   margin-top: 20px;
 }
 
 .summary-item {
@@ -456,7 +454,14 @@ li {
   flex: 1;
   text-align: left;
 }
-
+/* Donut Chart Styles */
+canvas {
+  margin-top: 20px; 
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
 /* Media query to make the layout responsive */
 @media (max-width: 768px) {
   li {
