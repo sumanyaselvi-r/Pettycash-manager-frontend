@@ -14,7 +14,7 @@ const ReportPage = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        let url = `/api/transactions/report?type=${reportType}`;
+        let url = `https://pettycashbackend.onrender.com/api/transactions/report?type=${reportType}`;
 
         if (reportType === 'custom' && startDate && endDate) {
           url += `&startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`;
@@ -36,7 +36,7 @@ const ReportPage = () => {
 
   const handleExport = async (format) => {
     try {
-      let url = `/api/transactions/export?type=${reportType}&format=${format}`;
+      let url = `https://pettycashbackend.onrender.com/api/transactions/export?type=${reportType}&format=${format}`;
 
       if (reportType === 'custom' && startDate && endDate) {
         url += `&startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`;
