@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (userData) => {
     try {
       // Make a request to your server for authentication
-      const response = await axios.post('/api/login', {
+      const response = await axios.post('https://pettycashbackend.onrender.com/api/login', {
         username: userData.username,
         password: userData.password,
       });
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    axios.post('/api/logout')
+    axios.post('https://pettycashbackend.onrender.com/api/logout')
       .then(() => {
         setUser(null);
         setUser({ isAuthenticated: false });
