@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
 
-import signupimage from './images/image5.jpg'
+import signupimage from './images/image4.jpg'
 
 const Registration = () => {
   const [formData, setFormData] = useState({
@@ -57,7 +57,7 @@ const Registration = () => {
   };
   const handleRegister = async () => {
     try {
-      await axios.post('https://pettycashbackend.onrender.com/api/register', formData);
+      await axios.post('/api/register', formData);
       console.log('Registration successful!');
       setModalIsOpen(true);
       seterrorMessage('')
