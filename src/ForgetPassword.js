@@ -7,12 +7,16 @@ import axios from 'axios';
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false); 
   const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
     setEmail(e.target.value);
     setError('');
+    setMessage('');
+    setSuccess(false); 
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,22 +30,29 @@ const ForgotPassword = () => {
       return;
     }
 
-    // Add forgot password logic here (e.g., API call)
-    console.log('Forgot Password submitted:', email);
+    handleForgotPassword();
+   
   };
   const handleForgotPassword = async () => {
-    try {
-      const response = await axios.post('https://pettycashbackend.onrender.com/api/forgot-password', { email });
+     try {
+      const response = await axios.post('/api/forgot-password', { email });
       setMessage(response.data.message);
+      setError('');
+      setSuccess(true);
+      setEmail('') 
     } catch (error) {
       console.error(error);
       setMessage('Failed to send reset email');
+      setError('Error occurred');
+      setSuccess(false); 
     }
   };
   return (
     <div className='login-body'>
     <div className='login-container' >
       <h2>Forgot Password</h2>
+      {error && <span className="error" style={{color:'red'}}>{error}</span>}
+          {success && <span className="success" style={{color:'red'}}>{message}</span>}
       <form onSubmit={handleSubmit} className='formcontainer'>
        
           <input type="email" value={email} onChange={handleChange}  placeholder='Enter your Email' required />
