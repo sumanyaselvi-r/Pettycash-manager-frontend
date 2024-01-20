@@ -24,7 +24,7 @@ const AnalyticsPage = () => {
     if (isAuthenticated) {
       // Fetch expense distribution data with authentication
       axios
-        .get('/api/analytics/expense-distribution', {
+        .get('https://pettycashbackend.onrender.com/api/analytics/expense-distribution', {
           headers: {
             Authorization: `Bearer ${user.token}`, // Make sure to include the authentication token
           },
