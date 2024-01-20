@@ -17,7 +17,7 @@ const TransactionList = () => {
   useEffect(() => {
     if (isAuthenticated) {
       axios
-        .get(`/api/transactions?userId=${user.userId}&sortBy=${sortBy}&searchTerm=${searchTerm}`, {
+        .get(`https://pettycashbackend.onrender.com/api/transactions?userId=${user.userId}&sortBy=${sortBy}&searchTerm=${searchTerm}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -34,7 +34,7 @@ const TransactionList = () => {
     console.log('usertoken:', user.token)
     if (isAuthenticated) {
       console.log('Sending request:', newTransaction);
-      axios.post('/api/transactions', { ...newTransaction, userId: user.userId }, {
+      axios.post('https://pettycashbackend.onrender.com/api/transactions', { ...newTransaction, userId: user.userId }, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -53,7 +53,7 @@ const TransactionList = () => {
   // Function to edit a transaction
   const editTransaction = (editedTransaction) => {
     axios
-      .put(`/api/transactions/${editedTransaction._id}`, editedTransaction, {
+      .put(`https://pettycashbackend.onrender.com/api/transactions/${editedTransaction._id}`, editedTransaction, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -73,7 +73,7 @@ const TransactionList = () => {
     const confirmDelete = window.confirm('Are you sure you want to delete this transaction?');
     if (confirmDelete) {
       axios
-        .delete(`/api/transactions/${transactionId}`, {
+        .delete(`https://pettycashbackend.onrender.com/api/transactions/${transactionId}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -107,7 +107,7 @@ const TransactionList = () => {
     const sortOrder = sortBy === 'date' ? 'desc' : 'asc';
 
     axios
-      .get(`/api/transactions?sortBy=${sortBy}&sortOrder=${sortOrder}`)
+      .get(`https://pettycashbackend.onrender.com/api/transactions?sortBy=${sortBy}&sortOrder=${sortOrder}`)
       .then((response) => setTransactions(response.data))
       .catch((error) => console.error('Error fetching transactions:', error));
   };
