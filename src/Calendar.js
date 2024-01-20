@@ -16,7 +16,7 @@ const MyCalendarPage = () => {
   useEffect(() => {
     if (isAuthenticated) {
       axios
-        .get('/api/calendar-events', {
+        .get('https://pettycashbackend.onrender.com/api/calendar-events', {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
