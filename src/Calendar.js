@@ -4,35 +4,45 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import axios from 'axios';
 
+import { useAuth } from './AuthContext'; 
+
 const MyCalendarPage = () => {
+  const { isAuthenticated, user } = useAuth(); 
+
   const localizer = momentLocalizer(moment);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get('/api/calendar-events')  // Replace with your API endpoint to fetch calendar events
-      .then((response) => {
-        setEvents(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching calendar events:', error);
-        setLoading(false);
-      });
-  }, []);
+    if (isAuthenticated) {
+      axios
+        .get('/api/calendar-events', {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        })
+        .then((response) => {
+          setEvents(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching calendar events:', error);
+          setLoading(false);
+        });
+    }
+  }, [isAuthenticated, user.token]);
 
   const EventComponent = ({ event }) => (
     <>
-      
-      {event.income > 0 && <div style={{ color: 'green',backgroundColor:'white',justifyContent:'center' }}>Income: {event.income}</div>}
-      {event.expense > 0 && <div style={{ color: 'red' ,backgroundColor:'white',justifyContent:'center'}}>Expense: {event.expense}</div>}
+      {event.income > 0 && <div style={{ color: 'green', backgroundColor: 'white', justifyContent: 'center' }}>Income: {event.income}</div>}
+      {event.expense > 0 && <div style={{ color: 'red', backgroundColor: 'white', justifyContent: 'center' }}>Expense: {event.expense}</div>}
     </>
   );
 
   return (
     <div className="calendar-page">
-      <h2>Calendar Page</h2>
+      <h2>Calendar</h2>
+   
       {loading ? (
         <div>Loading...</div>
       ) : (
@@ -45,6 +55,17 @@ const MyCalendarPage = () => {
           components={{
             event: EventComponent,
           }}
+          views={{
+            month: true,
+            week: false,
+            day: false,
+            agenda: false,
+          }}
+          toolbar={{
+            today: false,
+            prev: true,
+            next: true,
+          }}
         />
       )}
     </div>
@@ -52,4 +73,3 @@ const MyCalendarPage = () => {
 };
 
 export default MyCalendarPage;
-

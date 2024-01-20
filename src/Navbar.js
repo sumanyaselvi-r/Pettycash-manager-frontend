@@ -1,53 +1,45 @@
-import React, { Children, useState } from 'react'
-import { IoMdClose } from "react-icons/io";
+import React, {  useState } from 'react'
 import { BiSolidDashboard } from "react-icons/bi";
 import { GiTakeMyMoney } from "react-icons/gi";
-import { SiGoogleanalytics } from "react-icons/si";
 import { TbReport } from "react-icons/tb";
-import { SiMoneygram } from "react-icons/si";
 import { FaCalendarAlt } from "react-icons/fa";
-import { CgProfile } from "react-icons/cg";
-import { IoMdSettings } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 import { GiCash } from "react-icons/gi";
 import { FaBars } from "react-icons/fa";
 
-import { Link, NavLink } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 function Navbar() {
     const[isOpen,setisOpen]=useState(false)
     const toggle=()=>setisOpen(!isOpen)
+    
+    const menuItem=[
 
-
-    const menuItem=[{
-        path:"/",
+        {
+        path:"/manager/dashboard",
         name:"Dashboard",
         icon:<BiSolidDashboard />,
     },
     {
-        path:"/transactionlist",
+        path:"/manager/transactionlist",
         name:"Transactions",
         icon:<GiTakeMyMoney /> ,
     },
    
     {
-        path:"/reports",
+        path:"/manager/reports",
         name:"Reports",
         icon:<TbReport /> ,
     },
     
     {
-        path:"/Calendar",
+        path:"/manager/Calendar",
         name:"Calendar",
         icon:<FaCalendarAlt />,
     },
+    
     {
-        path:"",
-        name:"Setting",
-        icon:<IoMdSettings />,
-    },
-    {
-        path:"",
+        path:"/manager/logout",
         name:"Logout",
         icon:<BiLogOutCircle />,
     },
@@ -69,9 +61,9 @@ function Navbar() {
                 <div className='nav-list'>
                 {
                     menuItem.map((item,index)=>(
-                        <Link to={item.path} key={index} className="link" >
+                        <Link to={item.path} key={index} className="link"  >
                             <div className='icon'>{item.icon}</div>
-                            <div style={{display:isOpen? "block" : "none"}} className="link_text">{item.name}</div><br></br><br></br>
+                            <div style={{display:isOpen? "block" : "none"}} className="link_text"  onClick={() => setisOpen(false)} >{item.name}</div><br></br><br></br>
                         </Link>
                         
                     ))
@@ -80,6 +72,7 @@ function Navbar() {
             </div>
            
         </div>
+        
 
     </>
   )

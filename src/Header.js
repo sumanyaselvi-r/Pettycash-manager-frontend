@@ -1,25 +1,24 @@
-import React from 'react'
+import React from 'react';
 import { CgProfile } from "react-icons/cg";
-import { BiLogOutCircle } from "react-icons/bi";
 import { FaBars } from "react-icons/fa";
-import { RiLogoutCircleRLine } from "react-icons/ri";
-function Header({openSidebar}) {
+import { useAuth } from './AuthContext';
+
+function Header({ openSidebar }) {
+  const { user } = useAuth();
+
   return (
-    
-<header  className='header'>
-    <div className='menu-icon'>
-    <FaBars  onClick={openSidebar}/>
-    </div>
-    <div className='header-left'>
-       
-    </div>
-    <div className='header-right'>
-    <CgProfile style={{fontSize:'40px'}} />
+    <header className='header'>
+      <div className='menu-icon' onClick={openSidebar}>
+        <CgProfile style={{ fontSize: '40px' }} />
+      </div>
+      <div className='header-left'>
+        {user && user.isAuthenticated && (
+          <span>Welcome, {user.username}!</span>
+        )}
+      </div>
    
-    </div>
-</header>
-    
-  )
+    </header>
+  );
 }
 
-export default Header
+export default Header;

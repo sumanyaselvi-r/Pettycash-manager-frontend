@@ -1,44 +1,44 @@
+// App.js
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Login from './Login';
+import Manager from './Manager';
+import Registration from './SignUp'
+import ForgotPassword from './ForgetPassword';
+import ResetPassword from './RestPassword';
 
-import './App.css';
-import Header from './Header';
-import Sidebar from './Sidebar';
-import Home from './Home'
-import { useState } from 'react';
-import { Routes,Route } from 'react-router-dom';
-import TransactionList from './TransactionList';
-import TransactionForm from './TransactionForm';
-import DashboardPage from './Dashboard';
-import Navbar from './Navbar';
-import ReportPage from './Reportpage';
-import BudgetManagement from './BudgetManagement';
-import AnalyticsPage from './AnalyticsPage';
-import BudgetList from './BudgetList';
-import { Calendar } from 'react-big-calendar';
-import MyCalendarPage from './Calendar';
-import BudgetPage from './Budgetpage';
+const App = () => {
+  const [authenticated, setAuthenticated] = useState(false);
 
-function App() {
-  
-
+  // Function to set authenticated status after successful login
+  const handleLoginSuccess = () => {
+    setAuthenticated(true);
+  };
 
   return (
-   <>
-      <div className="app-container">
-        <Navbar />
-        <div className="content-container">
-          <Routes>
-            <Route path="/" element={<DashboardPage />} />
-            <Route path="/transactionlist" element={<TransactionList />} />
-          
-            <Route path="/reports" element={<ReportPage/>} />
-            <Route path="/budgets" element={<BudgetPage/>} />
-            <Route path="/Calendar" element={<MyCalendarPage/>} />
-          </Routes>
-          </div>
-      </div>
-   
-   </>
+    
+ 
+      <Routes>
+        {/* Public route: Login */}
+        <Route
+          path="/"
+          element={<Registration/>}/>
+        <Route
+          path="/login"
+          element={<Login onLoginSuccess={handleLoginSuccess} />}
+        />
+        <Route path='/forgot-password' element={<ForgotPassword/>}/>Forgot Password?
+        <Route path="/reset-password/:token" element={<ResetPassword/>}/>
+        {/* Protected route: Manager (requires authentication) */}
+        <Route
+          path="/manager/*"
+          element={authenticated ? <Manager /> : <Navigate to="/login" />}
+        />
+
+        {/* Add other routes as needed */}
+      </Routes>
+    
   );
-}
+};
 
 export default App;

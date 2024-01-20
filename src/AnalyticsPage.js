@@ -1,11 +1,12 @@
-// src/components/AnalyticsPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Doughnut, Line } from 'react-chartjs-2';
-import TopSpendingCategories from './Topspending';
-import SpendingTrendsChart from './MonthlySpendingTrends';
+
+import { useAuth } from './AuthContext';
 
 const AnalyticsPage = () => {
+  const { isAuthenticated, user } = useAuth(); 
+
   const [expenseData, setExpenseData] = useState({
     labels: [],
     data: [],
@@ -17,36 +18,24 @@ const AnalyticsPage = () => {
     data: [],
   });
 
-  const [topSpendingCategories, setTopSpendingCategories] = useState([]);
+  
 
   useEffect(() => {
-    // Fetch expense distribution data
-    axios.get('/api/analytics/expense-distribution')
-      .then(response => {
-        setExpenseData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching expense distribution data:', error);
-      });
+    if (isAuthenticated) {
+      // Fetch expense distribution data with authentication
+      axios
+        .get('/api/analytics/expense-distribution', {
+          headers: {
+            Authorization: `Bearer ${user.token}`, // Make sure to include the authentication token
+          },
+        })
+        .then((response) => setExpenseData(response.data))
+        .catch((error) => console.error('Error fetching expense-distribution:', error));
+      }
+    
+  
 
-    // Fetch monthly spending trends data
-    axios.get('/api/analytics/monthly-trends')
-      .then(response => {
-        setMonthlyTrends(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching monthly spending trends data:', error);
-      });
-
-    // Fetch top spending categories
-    axios.get('/api/analytics/top-spending-categories')
-      .then(response => {
-        setTopSpendingCategories(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching top spending categories:', error);
-      });
-  }, []);
+  }, [isAuthenticated]);
 
   const expenseChart = {
     labels: expenseData.labels,
@@ -76,22 +65,11 @@ const AnalyticsPage = () => {
     },
   };
 
-  const monthlyTrendsChart = {
-    labels: monthlyTrends.labels,
-    datasets: [
-      {
-        label: 'Monthly Spending Trends',
-        data: monthlyTrends.data,
-        borderColor: 'rgba(255,99,132,1)',
-        backgroundColor: 'rgba(255,99,132,0.2)',
-        fill: true,
-      },
-    ],
-  };
+  
 
   return (
     <div>
-      <h2>Expense Distribution Chart</h2>
+      <h2>Expense Distribution </h2>
       {expenseData.labels.length > 0 && (
         <Doughnut
           data={expenseChart}

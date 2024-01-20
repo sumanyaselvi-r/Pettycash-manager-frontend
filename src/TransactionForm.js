@@ -1,16 +1,23 @@
-// TransactionForm.js
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faShoppingCart, faHome, faCar, faUtensils } from '@fortawesome/free-solid-svg-icons';
-
-
+import { 
+  faCoffee, 
+  faShoppingCart, 
+  faHome, 
+  faCar, 
+  faUtensils,
+  faBook,
+  faLaptop,
+  faTshirt,
+} from '@fortawesome/free-solid-svg-icons';
+import { MdEmojiTransportation } from "react-icons/md";
 const TransactionForm = ({ addTransaction, editTransaction, onSave, onCancel }) => {
   const [formData, setFormData] = useState({
     date: '',
     description: '',
     amount: '',
     category: '',
-    type: 'expense', // Set the default type to 'expense'
+    type: 'expense',
   });
 
   const categoryIcons = {
@@ -19,7 +26,11 @@ const TransactionForm = ({ addTransaction, editTransaction, onSave, onCancel }) 
     'Home': faHome,
     'Car': faCar,
     'Food': faUtensils,
-    // Add more categories and icons as needed
+    'Books': faBook,
+    'Electronics': faLaptop,
+    'Clothing': faTshirt,
+    'Transport':<MdEmojiTransportation />
+   
   };
 
   useEffect(() => {
@@ -29,11 +40,10 @@ const TransactionForm = ({ addTransaction, editTransaction, onSave, onCancel }) 
         description: editTransaction.description,
         amount: editTransaction.amount,
         category: editTransaction.category,
-        type: editTransaction.type || 'expense', // Set the default type to 'expense' if not provided
+        type: editTransaction.type || 'expense',
       });
     }
   }, [editTransaction]);
-
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,18 +53,16 @@ const TransactionForm = ({ addTransaction, editTransaction, onSave, onCancel }) 
     if (editTransaction) {
       onSave({ ...formData, _id: editTransaction._id });
     } else {
-      // Set the default type to 'expense' if not provided
       const newTransaction = { ...formData, type: formData.type || 'expense' };
       addTransaction(newTransaction);
     }
 
-    // Reset form data
     setFormData({
       date: '',
       description: '',
       amount: '',
       category: '',
-      type: 'expense', // Set the default type to 'expense'
+      type: 'expense',
     });
   };
 
@@ -76,18 +84,18 @@ const TransactionForm = ({ addTransaction, editTransaction, onSave, onCancel }) 
       <form>
         <div>
           <label>Date:</label>
-          <input type="date" name="date" value={formData.date} onChange={handleChange} />
+          <input type="date" name="date" value={formData.date} onChange={handleChange} required />
         </div>
         <div>
           <label>Description:</label>
-          <input type="text" name="description" value={formData.description} onChange={handleChange} />
+          <input type="text" name="description" value={formData.description} onChange={handleChange} required />
         </div>
         <div>
           <label>Amount:</label>
-          <input type="number" name="amount" value={formData.amount} onChange={handleChange} />
+          <input type="number" name="amount" value={formData.amount} onChange={handleChange} required />
         </div>
         <div>
-        <label>Category:</label>
+          <label>Category:</label>
           <div>
             {Object.keys(categoryIcons).map((category) => (
               <label key={category}>
@@ -97,16 +105,17 @@ const TransactionForm = ({ addTransaction, editTransaction, onSave, onCancel }) 
                   value={category}
                   checked={formData.category === category}
                   onChange={handleChange}
+                  required
                 />
                 <FontAwesomeIcon icon={categoryIcons[category]} />
                 <span>{category}</span>
               </label>
             ))}
-            </div>
+          </div>
         </div>
         <div>
           <label>Type:</label>
-          <select name="type" value={formData.type} onChange={handleChange}>
+          <select name="type" value={formData.type} onChange={handleChange} required>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>
